@@ -1,4 +1,11 @@
-async function fetchCityCoordinates(cityName) {
+/**
+ * Gets (from geocoding-api's API) the coordinates of a city passed as argument
+ * to the function
+ *
+ * @param {string} cityName Name of the city
+ * @returns An object named "coordinates" containing relevant information
+ */
+async function getCoordinates(cityName) {
   try {
     const response = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`
@@ -11,6 +18,8 @@ async function fetchCityCoordinates(cityName) {
     console.error(e);
   }
 }
+
+function getWeatherInfo(coordinates) {}
 
 fetchCityCoordinates('sdfo').then((data) => console.log(data));
 
