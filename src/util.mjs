@@ -6,7 +6,9 @@ export function getCityNameFromUserInput() {
 
 export async function loadInitialWeatherData() {
   const cityName = 'lobito';
-  const weatherInfo = filterWeatherDetails(await getCurrentWeather(cityName));
+  const response = await getCurrentWeather(cityName);
+  const weatherInfo = filterWeatherDetails(response);
+  console.log(response.current);
   displayWeather(weatherInfo);
 }
 function filterWeatherDetails(weatherInfo) {
@@ -18,21 +20,21 @@ function filterWeatherDetails(weatherInfo) {
           degreesFahrenheit: weatherInfo.current.temp_f,
         },
         feelsLike: {
-          degreesCelsius: weatherInfo.current.condition.feelsLike_c,
-          degreesFahrenheit: weatherInfo.current.condition.feelsLike_f,
+          degreesCelsius: weatherInfo.current.feelslike_c,
+          degreesFahrenheit: weatherInfo.current.feelslike_f,
         },
       },
       visibility: {
-        kilometers: weatherInfo.current.condition.vis_km,
-        miles: weatherInfo.current.condition.vis_miles,
+        kilometers: weatherInfo.current.vis_km,
+        miles: weatherInfo.current.vis_miles,
       },
       wind: {
-        kilometersPerHour: weatherInfo.current.condition.wind_kph,
-        milesPerHour: weatherInfo.current.condition.wind_mph,
+        kilometersPerHour: weatherInfo.current.wind_kph,
+        milesPerHour: weatherInfo.current.wind_mph,
       },
-      condition: weatherInfo.current.condition.text,
-      humidity: weatherInfo.current.condition.humidity,
-      uv: weatherInfo.current.condition.uv,
+      condition: weatherInfo.current.text,
+      humidity: weatherInfo.current.humidity,
+      uv: weatherInfo.current.uv,
     },
     location: {
       city: weatherInfo.location.name,
@@ -45,5 +47,5 @@ function filterWeatherDetails(weatherInfo) {
 }
 
 function displayWeather(weatherInfo) {
-  console.log(weatherInfo.location);
+  console.log(weatherInfo);
 }
