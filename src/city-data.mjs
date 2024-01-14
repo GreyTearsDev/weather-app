@@ -5,7 +5,7 @@
  * @param {string} cityName Name of the city
  * @returns A promise for the data about the weather
  */
-async function getCurrentWeather(cityName) {
+export default async function getCurrentWeather(cityName) {
   try {
     const response = await fetch(
       `https://api.weatherapi.com/v1/current.json?key=998c75f5d06b4a84ae245051241201&q=${cityName}`
@@ -16,11 +16,10 @@ async function getCurrentWeather(cityName) {
   }
 }
 
-getCurrentWeather('lobito').then((data) => console.log(data));
+const weatherData = await getCurrentWeather('lobito');
+console.log(weatherData);
 
 // getCoordinates('lobito').then((coordinates) => getWeatherInfo(coordinates));
-
-function fetchWeatherData(location) {}
 
 // fetchCityLocation('lobito')
 //   .then((response) => response.json())
