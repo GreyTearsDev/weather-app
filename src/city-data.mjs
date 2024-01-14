@@ -16,9 +16,6 @@ export default async function getCurrentWeather(cityName) {
   }
 }
 
-const weatherData = await getCurrentWeather('lobito');
-console.log(weatherData);
-
 // getCoordinates('lobito').then((coordinates) => getWeatherInfo(coordinates));
 
 // fetchCityLocation('lobito')
