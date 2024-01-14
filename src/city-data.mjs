@@ -15,12 +15,3 @@ export default async function getCurrentWeather(cityName) {
     console.error(e);
   }
 }
-
-// getCoordinates('lobito').then((coordinates) => getWeatherInfo(coordinates));
-
-// fetchCityLocation('lobito')
-//   .then((response) => response.json())
-//   .then((response) => {
-//     const { latitude, longitude } = response.results[0];
-//     const cityCoordinates = []
-//   });
