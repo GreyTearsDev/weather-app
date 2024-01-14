@@ -15,6 +15,9 @@ export async function updateInfoOnScreen() {
 function displayMainInfo(weather) {
   const current = document.getElementById('current-temperature');
   const feelsLike = document.getElementById('feels-like-temperature');
+  const region = document.getElementById('region');
+  const localTime = document.getElementById('localtime');
+  const city = document.getElementById('city');
 
   // Determine the selected temperature unit (Celsius or Fahrenheit)
   const unit = getDegreeUnit();
@@ -22,13 +25,19 @@ function displayMainInfo(weather) {
   const feelsLikeTemperature =
     weather.current.temperature.feelsLike[`degrees${unit}`];
 
+  console.log(weather);
+
   if (unit === 'Celsius') {
     current.innerText = `${realTemperature}°C`;
+    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
   } else {
     current.innerText = `${realTemperature}°F`;
+    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
   }
 
-  feelsLike.innerText = `Feels like ${feelsLikeTemperature} degrees ${unit}`;
+  city.innerText = `${weather.location.city}`;
+  region.innerText = `${weather.location.region} - ${weather.location.country}`;
+  localTime.innerText = `${weather.location.localTime}`;
 }
 
 async function updateLocationInfo(weather) {}
