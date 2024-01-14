@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-main {
+.main-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: minmax(40px, clamp(40px, 1fr, 60px)) 1fr 50px;
