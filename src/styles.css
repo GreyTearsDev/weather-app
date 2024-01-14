@@ -22,6 +22,26 @@ main > div {
 
 .top {
   grid-area: top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top__form {
+  border: 1px solid red;
+  display: flex;
+  gap: 1%;
+  justify-content: space-between;
+  width: 40vw;
+}
+
+.form__input {
+  height: 25px;
+  padding: 3px;
+  width: 100%;
+}
+
+.form_button {
 }
 
 .middle {
