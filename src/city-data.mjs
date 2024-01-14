@@ -1,27 +1,24 @@
 /**
- * Gets (from geocoding-api's API) the coordinates of a city passed as argument
- * to the function
+ * Gets (from https://api.weatherapi.com)
+ * the weather data for a city
  *
  * @param {string} cityName Name of the city
- * @returns An object named "coordinates" containing relevant information
+ * @returns A promise for the data about the weather
  */
-async function getCoordinates(cityName) {
+async function getCurrentWeather(cityName) {
   try {
     const response = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`
+      `https://api.weatherapi.com/v1/current.json?key=998c75f5d06b4a84ae245051241201&q=${cityName}`
     );
-    const cityInformation = await response.json();
-    const { latitude, longitude } = cityInformation.results[0];
-    const coordinates = { latitude, longitude };
-    return coordinates;
+    return response.json();
   } catch (e) {
     console.error(e);
   }
 }
 
-function getWeatherInfo(coordinates) {}
+getCurrentWeather('lobito').then((data) => console.log(data));
 
-fetchCityCoordinates('sdfo').then((data) => console.log(data));
+// getCoordinates('lobito').then((coordinates) => getWeatherInfo(coordinates));
 
 function fetchWeatherData(location) {}
 
