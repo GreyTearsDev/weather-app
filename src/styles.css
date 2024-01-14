@@ -6,14 +6,15 @@
   padding: 0;
 }
 
-.body {
+body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: clamp(40px, 8vh, 60px) 1fr 50px;
   grid-template-areas:
     'top top top'
     'middle middle middle'
     'bottom bottom bottom';
+  height: 100vh;
 }
 
 main > div {
@@ -49,7 +50,6 @@ main > div {
   grid-area: middle;
   display: grid;
   grid-template-columns: 20vw 1fr 20vw;
-  grid-template-rows: 100%;
   grid-template-areas: 'left center right';
 }
 
