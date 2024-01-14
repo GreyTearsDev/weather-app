@@ -49,3 +49,9 @@ function getDegreeUnit() {
   // If Celsius is not selected, assume Fahrenheit is selected
   return 'Fahrenheit';
 }
+
+export async function loadDefaultWeatherData() {
+  const cityName = 'lobito';
+  const weather = await getWeather(cityName);
+  displayMainInfo(weather);
+}
