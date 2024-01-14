@@ -1,0 +1,33 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 40px 1fr minmax(50px, 20vh);
+  grid-template-areas:
+    'top top top'
+    'middle middle middle'
+    'bottom bottom bottom';
+}
+
+main > div {
+  border: 1px solid black;
+}
+
+.top {
+  grid-area: top;
+}
+
+.middle {
+  grid-area: middle;
+}
+
+.bottom {
+  grid-area: bottom;
+}
