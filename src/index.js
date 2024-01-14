@@ -1,14 +1,11 @@
 'use strict';
 import './styles.css';
-import getCurrentWeather from './city-data.mjs';
 import { getCityNameFromUserInput } from './util.mjs';
-import { loadInitialWeatherData } from './util.mjs';
-
-loadInitialWeatherData();
+import getWeather from './weather.mjs';
 
 const searchBtn = document.querySelector('.form__button');
 searchBtn.addEventListener('click', async function () {
   const cityName = getCityNameFromUserInput();
-  const weatherData = await getCurrentWeather(cityName);
+  const weatherData = await getWeather(cityName);
   console.log(weatherData);
 });
