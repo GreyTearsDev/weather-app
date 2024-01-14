@@ -1,12 +1,9 @@
 /**
- * Fetches the weather data of a given city
- * whose name is passed as the argument
- * using "WeatherAPI"'s API
- * (at https://api.weatherapi.com)
+ * Fetches weather data for a specified city using the WeatherAPI's API
+ * (available at https://api.weatherapi.com).
  *
- *
- * @param {string} cityName Name of the city
- * @returns A promise for the data about the weather
+ * @param {String} cityName - The name of the city.
+ * @returns {Promise} A promise resolving to the weather data.
  */
 async function fetchWeatherData(cityName) {
   try {
@@ -19,22 +16,16 @@ async function fetchWeatherData(cityName) {
   }
 }
 
-export async function loadInitialWeatherData() {
-  const cityName = 'lobito';
-  const response = await getCurrentWeather(cityName);
-  const weatherInfo = filterWeatherDetails(response);
-  displayWeather(weatherInfo);
-}
-
 /**
- * Filters the data passed as argument and returns
- * an object containing only relevant properties
+ * Filters the provided weather information and returns a new object
+ * containing only relevant properties.
  *
- * @param {*} weatherInfo Data to be filtered from
- * @returns A new object
+ * @param {Object} weatherInfo - The raw weather data to be filtered.
+ * @returns {Object} A new object with filtered weather details.
  */
 function filterWeatherDetails(weatherInfo) {
   return {
+    // Extract and structure relevant information about the current weather
     current: {
       temperature: {
         real: {
@@ -54,10 +45,11 @@ function filterWeatherDetails(weatherInfo) {
         kilometersPerHour: weatherInfo.current.wind_kph,
         milesPerHour: weatherInfo.current.wind_mph,
       },
-      condition: weatherInfo.current.text,
+      condition: weatherInfo.current.condition.text,
       humidity: weatherInfo.current.humidity,
       uv: weatherInfo.current.uv,
     },
+    // Extract and structure information about the location
     location: {
       city: weatherInfo.location.name,
       region: weatherInfo.location.region,
@@ -68,12 +60,13 @@ function filterWeatherDetails(weatherInfo) {
   };
 }
 
-function displayWeather(weatherInfo) {
-  console.log(weatherInfo);
-}
-
+/**
+ * Retrieves weather information for a specified city.
+ *
+ * @param {String} cityName - The name of the city.
+ * @returns {Object} An object containing weather information.
+ */
 export default async function getWeather(cityName) {
   const response = await fetchWeatherData(cityName);
-  const cleanData = filterWeatherDetails(response);
-  return cleanData;
+  return filterWeatherDetails(response);
 }
