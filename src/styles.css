@@ -8,7 +8,7 @@
 
 body {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   grid-template-rows: clamp(40px, 8vh, 60px) 1fr 50px;
   grid-template-areas:
     'top top top'
@@ -49,7 +49,7 @@ main > div {
   border: 1px solid green;
   grid-area: middle;
   display: grid;
-  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-columns: 20vw 1fr;
   grid-template-areas: 'left center right';
 }
 
