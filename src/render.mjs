@@ -8,16 +8,28 @@ export async function updateInfoOnScreen() {
 }
 
 function displayMainInfo(weather) {
-  const currentTemperature = document.getElementById('current-temperature');
-  const feelsLikeTemperature = document.getElementById(
-    'feels-like-temperature'
-  );
-  const realCelsius = weather.current.temperature.real.degreesCelsius;
-  const realFahrenheit = weather.current.temperature.real.degreesFahrenheit;
-  const FeelsLikeCelsius = weather.current.temperature.feelsLike.degreesCelsius;
-  const FeelsLikeFahrenheit =
-    weather.current.temperature.feelsLike.degreesFahrenheit;
+  const current = document.getElementById('current-temperature');
+  const feelsLike = document.getElementById('feels-like-temperature');
+  const unit = getDegreeUnit();
+  const realTemperature = weather.current.temperature.real[`degrees${unit}`];
+  const feelsLikeTemperature =
+    weather.current.temperature.feelsLike[`degrees${unit}`];
 
-  currentTemperature.innerText = `${realCelsius}°C`;
-  feelsLikeTemperature.innerText = `Feels like ${FeelsLikeCelsius}°C`;
+  if (unit === 'Celsius') {
+    current.innerText = `${realTemperature}°C`;
+  } else {
+    current.innerText = `${realTemperature}°F`;
+  }
+
+  feelsLike.innerText = `Feels like ${feelsLikeTemperature} degrees ${unit}`;
+}
+
+async function updateLocationInfo(weather) {}
+
+function getDegreeUnit() {
+  const radioButtons = document.getElementsByName('temp');
+  const celsius = radioButtons[0];
+
+  if (celsius.checked) return 'Celsius';
+  return 'Fahrenheit';
 }
