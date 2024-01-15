@@ -33,3 +33,17 @@ export function getImageCode(weatherInfo) {
   const imageCode = weatherInfo.current.codeToIcon[`${weatherCode}`];
   return imageCode;
 }
+
+/**
+ * Imports all images matching the provided webpack require context.
+ *
+ * This function takes a webpack require context (`require.context`) and maps
+ * over all matched module request strings, effectively importing all images
+ * that match the specified context. The result is an array of imported images.
+ *
+ * @param {Function} r - Webpack require context function.
+ * @returns {Array} An array containing all imported images.
+ */
+export function importAllImages(r) {
+  return r.keys().map(r);
+}

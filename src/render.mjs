@@ -1,6 +1,6 @@
 import { getCityNameFromUserInput } from './util.mjs';
 import getWeather from './weather.mjs';
-import { isDay } from './util.mjs';
+import { isDay, getImageCode } from './util.mjs';
 
 export async function updateInfoOnScreen() {
   const cityName = getCityNameFromUserInput();
@@ -38,8 +38,9 @@ function displayMainInfo(weather) {
   console.log(weather.current);
 
   if (isDay(weather)) {
-    const imgCode = weatherCode;
-    icon.src = `src/icons/64x64/day/${weather.current.codeToIcon}.png`;
+    const imgCode = getImageCode(weather);
+    console.log(imgCode);
+    icon.src = 'src/icons/64x64/day/' + imgCode + '.png';
   }
 
   city.innerText = `${weather.location.city}`;
