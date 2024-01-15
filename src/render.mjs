@@ -38,7 +38,8 @@ function displayMainInfo(weather) {
   console.log(weather.current);
 
   if (isDay(weather)) {
-    icon.src = `src/icons/64x64/day/${weather.current.code}.png`;
+    const imgCode = weatherCode;
+    icon.src = `src/icons/64x64/day/${weather.current.codeToIcon}.png`;
   }
 
   city.innerText = `${weather.location.city}`;

@@ -17,3 +17,10 @@ export function getCityNameFromUserInput() {
 export function isDay(weather) {
   return weather.current.isDay === 1 ? true : false;
 }
+
+async function loadCSV() {
+  try {
+  } catch (err) {
+    console.error(err);
+  }
+}
