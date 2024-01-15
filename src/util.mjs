@@ -75,14 +75,44 @@ export function getDegreeUnit() {
   return 'Fahrenheit';
 }
 
+/**
+ * Retrieves the feels-like temperature from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @param {String} unit - The temperature unit to retrieve ('Celsius' or 'Fahrenheit').
+ * @returns The feels-like temperature in the specified unit.
+ */
 export function getFeelsLikeTemperature(weather, unit) {
   return weather.current.temperature.feelsLike[`degrees${unit}`];
 }
 
+/**
+ * Retrieves the real temperature from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @param {String} unit - The temperature unit to retrieve ('Celsius' or 'Fahrenheit').
+ * @returns The real temperature in the specified unit.
+ */
 export function getRealTemperature(weather, unit) {
   return weather.current.temperature.real[`degrees${unit}`];
 }
 
+/**
+ * Retrieves the city name from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The name of the city.
+ */
 export function getCityName(weather) {
   return weather.location.city;
+}
+
+/**
+ * Retrieves the weather condition from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The current weather condition.
+ */
+export function getWeatherCondition(weather) {
+  return weather.current.condition;
 }
