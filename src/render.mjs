@@ -1,6 +1,16 @@
-import { getCityNameFromUserInput } from './util.mjs';
 import getWeather from './weather.mjs';
-import { isDay, renderWeatherIcon } from './util.mjs';
+import {
+  renderWeatherIcon,
+  getDegreeUnit,
+  getFeelsLikeTemperature,
+  getRealTemperature,
+  getWeatherCondition,
+  getCityName,
+  getCityNameFromUserInput,
+  getRegionName,
+  getCountry,
+  getLocalTime,
+} from './util.mjs';
 
 export async function updateInfoOnScreen() {
   const cityName = getCityNameFromUserInput();
@@ -19,14 +29,12 @@ function displayMainInfo(weather) {
   const region = document.getElementById('region');
   const localTime = document.getElementById('localtime');
   const city = document.getElementById('city');
+  const weatherCondition = document.getElementById('condition');
+  const degreeUnit = getDegreeUnit();
+  const realTemperature = getRealTemperature(weather, degreeUnit);
+  const feelsLikeTemperature = getFeelsLikeTemperature(weather, degreeUnit);
 
-  // Determine the selected temperature unit (Celsius or Fahrenheit)
-  const unit = getDegreeUnit();
-  const realTemperature = weather.current.temperature.real[`degrees${unit}`];
-  const feelsLikeTemperature =
-    weather.current.temperature.feelsLike[`degrees${unit}`];
-
-  if (unit === 'Celsius') {
+  if (degreeUnit === 'Celsius') {
     current.innerText = `${realTemperature}°C`;
     feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
   } else {
@@ -35,57 +43,22 @@ function displayMainInfo(weather) {
   }
 
   renderWeatherIcon(weather);
-
-  city.innerText = `${weather.location.city}`;
-  region.innerText = `${weather.location.region} - ${weather.location.country}`;
-  localTime.innerText = `${weather.location.localTime}`;
-}
-
-function displayAdditionalInfo(weather) {
-  const current = document.getElementById('current-temperature');
-  const feelsLike = document.getElementById('feels-like-temperature');
-  const region = document.getElementById('region');
-  const localTime = document.getElementById('localtime');
-  const city = document.getElementById('city');
-
-  // Determine the selected temperature unit (Celsius or Fahrenheit)
-  const unit = getDegreeUnit();
-  const realTemperature = weather.current.temperature.real[`degrees${unit}`];
-  const feelsLikeTemperature =
-    weather.current.temperature.feelsLike[`degrees${unit}`];
-
-  if (unit === 'Celsius') {
-    current.innerText = `${realTemperature}°C`;
-    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
-  } else {
-    current.innerText = `${realTemperature}°F`;
-    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
-  }
-
-  city.innerText = `${weather.location.city}`;
-  region.innerText = `${weather.location.region} - ${weather.location.country}`;
-  localTime.innerText = `${weather.location.localTime}`;
-}
-
-/**
- * Retrieves the selected temperature unit (Celsius or Fahrenheit)
- * from a group of radio buttons.
- *
- * @returns {String} The selected temperature unit.
- */
-function getDegreeUnit() {
-  const radioButtons = document.getElementsByName('temp');
-  // Get the first radio button (assumes it represents Celsius)
-  const celsius = radioButtons[0];
-
-  if (celsius.checked) return 'Celsius';
-
-  // If Celsius is not selected, assume Fahrenheit is selected
-  return 'Fahrenheit';
+  weatherCondition.innerText = getWeatherCondition(weather);
+  city.innerText = getCityName(weather);
+  region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
+  localTime.innerText = `${getLocalTime(weather)}`;
 }
 
 export async function loadDefaultWeatherData() {
   const cityName = 'lobito';
   const weather = await getWeather(cityName);
+  console.log(weather);
   displayMainInfo(weather);
 }
+
+const radioButtons = document.getElementsByName('temp');
+radioButtons.forEach((button) =>
+  button.addEventListener('click', function () {
+    updateInfoOnScreen();
+  })
+);
