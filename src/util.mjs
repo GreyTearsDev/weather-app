@@ -28,7 +28,7 @@ export function isDay(weather) {
  * @param {Object} weatherInfo - The weather information object.
  * @returns {string} The image code associated with the current weather conditions.
  */
-export function getImageCode(weatherInfo) {
+function getImageCode(weatherInfo) {
   const weatherCode = weatherInfo.current.code;
   const imageCode = weatherInfo.current.codeToIcon[`${weatherCode}`];
   return imageCode;
@@ -51,10 +51,38 @@ export function renderWeatherIcon(weather) {
   import(`/src/icons/64x64/${period}/${imgCode}.png`)
     .then((image) => {
       // Set the image source once it's loaded
-      console.log(image);
       icon.src = image.default;
     })
     .catch((error) => {
       console.error('Error loading image:', error);
     });
+}
+
+/**
+ * Retrieves the selected temperature unit (Celsius or Fahrenheit)
+ * from a group of radio buttons.
+ *
+ * @returns {String} The selected temperature unit.
+ */
+export function getDegreeUnit() {
+  const radioButtons = document.getElementsByName('temp');
+  // Get the first radio button (assumes it represents Celsius)
+  const celsius = radioButtons[0];
+
+  if (celsius.checked) return 'Celsius';
+
+  // If Celsius is not selected, assume Fahrenheit is selected
+  return 'Fahrenheit';
+}
+
+export function getFeelsLikeTemperature(weather, unit) {
+  return weather.current.temperature.feelsLike[`degrees${unit}`];
+}
+
+export function getRealTemperature(weather, unit) {
+  return weather.current.temperature.real[`degrees${unit}`];
+}
+
+export function getCityName(weather) {
+  return weather.location.city;
 }
