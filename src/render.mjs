@@ -1,6 +1,6 @@
 import { getCityNameFromUserInput } from './util.mjs';
 import getWeather from './weather.mjs';
-import { isDay, getImageCode } from './util.mjs';
+import { isDay, renderWeatherIcon } from './util.mjs';
 
 export async function updateInfoOnScreen() {
   const cityName = getCityNameFromUserInput();
@@ -19,7 +19,6 @@ function displayMainInfo(weather) {
   const region = document.getElementById('region');
   const localTime = document.getElementById('localtime');
   const city = document.getElementById('city');
-  const icon = document.getElementById('weather-icon');
 
   // Determine the selected temperature unit (Celsius or Fahrenheit)
   const unit = getDegreeUnit();
@@ -35,13 +34,7 @@ function displayMainInfo(weather) {
     feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
   }
 
-  console.log(weather.current);
-
-  if (isDay(weather)) {
-    const imgCode = getImageCode(weather);
-    console.log(imgCode);
-    icon.src = 'src/icons/64x64/day/' + imgCode + '.png';
-  }
+  renderWeatherIcon(weather);
 
   city.innerText = `${weather.location.city}`;
   region.innerText = `${weather.location.region} - ${weather.location.country}`;

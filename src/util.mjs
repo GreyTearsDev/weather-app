@@ -35,15 +35,26 @@ export function getImageCode(weatherInfo) {
 }
 
 /**
- * Imports all images matching the provided webpack require context.
+ * Renders the weather icon on the webpage based on the current weather conditions.
  *
- * This function takes a webpack require context (`require.context`) and maps
- * over all matched module request strings, effectively importing all images
- * that match the specified context. The result is an array of imported images.
+ * This function dynamically loads and displays a weather icon based on the provided
+ * weather data. It uses the image code retrieved from the weather information and
+ * determines whether it is day or night to select the appropriate icon.
  *
- * @param {Function} r - Webpack require context function.
- * @returns {Array} An array containing all imported images.
+ * @param {Object} weather - The weather data object containing current conditions.
  */
-export function importAllImages(r) {
-  return r.keys().map(r);
+export function renderWeatherIcon(weather) {
+  const icon = document.getElementById('weather-icon');
+  const imgCode = getImageCode(weather);
+  const period = weather.current.isDay ? 'day' : 'night';
+
+  import(`/src/icons/64x64/${period}/${imgCode}.png`)
+    .then((image) => {
+      // Set the image source once it's loaded
+      console.log(image);
+      icon.src = image.default;
+    })
+    .catch((error) => {
+      console.error('Error loading image:', error);
+    });
 }
