@@ -24,6 +24,7 @@ async function fetchWeatherData(cityName) {
  * @returns {Object} A new object with filtered weather details.
  */
 function filterWeatherDetails(weatherInfo) {
+  console.log(weatherInfo.current.is_day);
   return {
     // Extract and structure relevant information about the current weather
     current: {
@@ -90,12 +91,12 @@ function filterWeatherDetails(weatherInfo) {
         },
       },
       visibility: {
-        kilometers: weatherInfo.current.vis_km,
-        miles: weatherInfo.current.vis_miles,
+        km: weatherInfo.current.vis_km,
+        mi: weatherInfo.current.vis_miles,
       },
       wind: {
-        kilometersPerHour: weatherInfo.current.wind_kph,
-        milesPerHour: weatherInfo.current.wind_mph,
+        kph: weatherInfo.current.wind_kph,
+        mph: weatherInfo.current.wind_mph,
       },
       condition: weatherInfo.current.condition.text,
       humidity: weatherInfo.current.humidity,
@@ -120,5 +121,7 @@ function filterWeatherDetails(weatherInfo) {
  */
 export default async function getWeather(cityName) {
   const response = await fetchWeatherData(cityName);
-  return filterWeatherDetails(response);
+  const filteredResponse = await filterWeatherDetails(response);
+  console.log(filteredResponse);
+  return filteredResponse;
 }

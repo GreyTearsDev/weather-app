@@ -85,7 +85,12 @@ export function getDegreeUnit() {
  */
 export function getVisibilityUnit() {
   const system = getPreferredSystem();
-  return system == 'metric' ? 'kilometers' : 'miles';
+  return system == 'metric' ? 'km' : 'mi';
+}
+
+export function getWindUnit() {
+  const system = getPreferredSystem();
+  return system == 'metric' ? 'kph' : 'mph';
 }
 
 /**
@@ -187,9 +192,14 @@ export function getVisibility(weather) {
    */
   const unit = getVisibilityUnit();
 
-  if (unit === 'kilometers') {
+  if (unit === 'km') {
     return weather.current.visibility[`${unit}`];
   }
 
   return weather.current.visibility[`${unit}`];
+}
+
+export function getWindVelocity(weather) {
+  const unit = getWindUnit();
+  return weather.current.wind[`${unit}`];
 }

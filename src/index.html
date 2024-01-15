@@ -21,11 +21,11 @@
     <!-- Middle section -->
     <main class="middle">
       <div class="middle__container middle__container--left">
-        <p>Feels like:</p>
-        <p>Chance of rain:</p>
-        <p>Chance of snow:</p>
-        <p>Visibility:</p>
-        <p>Wind speed:</p>
+        <h4 id="condition"></h4>
+        <p id="humidity"></p>
+        <p id=""></p>
+        <p id="visibility-level"></p>
+        <p id="wind-speed"></p>
         <p>UV:</p>
         <p>Sunrise:</p>
         <p>Sunset:</p>
@@ -34,24 +34,26 @@
         <fieldset class="temperature-switcher">
           <p>
             <input type="radio" id="celsius" name="temp" checked="checked" />
-            <label for="celsius">C°</label>
+            <label for="celsius">Metric</label>
           </p>
           <p>
             <input type="radio" id="fahrenheit" name="temp" />
-            <label for="fahrenheit">F°</label>
+            <label for="fahrenheit">Imperial</label>
           </p>
         </fieldset>
         <div class="data__container">
-          <div>
-            <h2 id="city"></h2>
+          <div class="data__container__main-info">
+            <div>
+              <h2 id="city"></h2>
+            </div>
+            <h1 id="current-temperature"></h1>
+            <div class="img-container">
+              <img src="" alt="" id="weather-icon" />
+            </div>
           </div>
-          <h1 id="current-temperature"></h1>
           <h4 id="feels-like-temperature"></h4>
           <p id="region"></p>
           <p id="localtime"></p>
-          <div class="img-container">
-            <img src="" alt="" id="weather-icon" />
-          </div>
         </div>
       </div>
     </main>

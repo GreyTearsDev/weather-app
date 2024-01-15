@@ -13,6 +13,8 @@ import {
   getHumidity,
   getVisibility,
   getVisibilityUnit,
+  getWindVelocity,
+  getWindUnit,
 } from './util.mjs';
 
 export async function updateInfoOnScreen() {
@@ -35,11 +37,11 @@ function displayMainInfo(weather) {
   const humidity = document.getElementById('humidity');
   const weatherCondition = document.getElementById('condition');
   const visibility = document.getElementById('visibility-level');
+  const wind = document.getElementById('wind-speed');
 
-  const visibilityUnit = getVisibilityUnit(weather);
   const degreeUnit = getDegreeUnit();
-  const realTemperature = getRealTemperature(weather, degreeUnit);
-  const feelsLikeTemperature = getFeelsLikeTemperature(weather, degreeUnit);
+  const realTemperature = getRealTemperature(weather);
+  const feelsLikeTemperature = getFeelsLikeTemperature(weather);
 
   if (degreeUnit === 'Celsius') {
     current.innerText = `${realTemperature}°C`;
@@ -50,9 +52,13 @@ function displayMainInfo(weather) {
   }
 
   renderWeatherIcon(weather);
+
   visibility.innerText = `Visibility: ${getVisibility(
     weather
   )} ${getVisibilityUnit(weather)}`;
+  wind.innerText = `Wind velocity: ${getWindVelocity(
+    weather
+  )} ${getWindUnit()}`;
   humidity.innerText = `Humidity: ${getHumidity(weather)}%`;
   weatherCondition.innerText = getWeatherCondition(weather);
   city.innerText = getCityName(weather);
