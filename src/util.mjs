@@ -75,6 +75,17 @@ export function getDegreeUnit() {
   return 'Fahrenheit';
 }
 
+export function getVisibilityUnit() {
+  const radioButtons = document.getElementsByName('temp');
+  // Get the first radio button (assumes it represents Celsius)
+  const celsius = radioButtons[0];
+
+  if (celsius.checked) return 'kilometers';
+
+  // If Celsius is not selected, assume Fahrenheit is selected
+  return 'miles';
+}
+
 /**
  * Retrieves the feels-like temperature from the provided weather data.
  *
@@ -82,7 +93,8 @@ export function getDegreeUnit() {
  * @param {String} unit - The temperature unit to retrieve ('Celsius' or 'Fahrenheit').
  * @returns The feels-like temperature in the specified unit.
  */
-export function getFeelsLikeTemperature(weather, unit) {
+export function getFeelsLikeTemperature(weather) {
+  const unit = getDegreeUnit();
   return weather.current.temperature.feelsLike[`degrees${unit}`];
 }
 
@@ -93,7 +105,8 @@ export function getFeelsLikeTemperature(weather, unit) {
  * @param {String} unit - The temperature unit to retrieve ('Celsius' or 'Fahrenheit').
  * @returns The real temperature in the specified unit.
  */
-export function getRealTemperature(weather, unit) {
+export function getRealTemperature(weather) {
+  const unit = getDegreeUnit();
   return weather.current.temperature.real[`degrees${unit}`];
 }
 
@@ -145,4 +158,36 @@ export function getCountry(weather) {
  */
 export function getWeatherCondition(weather) {
   return weather.current.condition;
+}
+
+/**
+ * Retrieves the humidity value from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The humidity value as a percentage.
+ */
+export function getHumidity(weather) {
+  return weather.current.humidity;
+}
+
+/**
+ * Retrieves the visibility value from the provided weather data.
+ *
+ * This function considers the visibility unit and returns the corresponding value.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The visibility value based on the unit specified in the weather data.
+ */
+export function getVisibility(weather) {
+  /**
+   * Determines the visibility unit (either 'kilometers' or 'miles') from the weather data.
+   * @type {String}
+   */
+  const unit = getVisibilityUnit();
+
+  if (unit === 'kilometers') {
+    return weather.current.visibility[`${unit}`];
+  }
+
+  return weather.current.visibility[`${unit}`];
 }
