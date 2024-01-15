@@ -17,6 +17,10 @@ import {
   getWindUnit,
 } from './util.mjs';
 
+/**
+ * Updates the weather information displayed on the webpage based on user input.
+ * If no city name is provided, it defaults to 'lobito'.
+ */
 export async function updateInfoOnScreen() {
   let currentDefaultCity = 'lobito';
   const cityName = getCityNameFromUserInput();
@@ -38,6 +42,7 @@ export async function updateInfoOnScreen() {
  * @param {Object} weather - The weather data object containing current conditions.
  */
 async function displayMainInfo(weather) {
+  // DOM elements
   const current = document.getElementById('current-temperature');
   const feelsLike = document.getElementById('feels-like-temperature');
   const region = document.getElementById('region');
@@ -48,10 +53,12 @@ async function displayMainInfo(weather) {
   const visibility = document.getElementById('visibility-level');
   const wind = document.getElementById('wind-speed');
 
+  // Weather data and units
   const degreeUnit = getDegreeUnit();
   const realTemperature = getRealTemperature(weather);
   const feelsLikeTemperature = getFeelsLikeTemperature(weather);
 
+  // Display temperature based on the selected unit
   if (degreeUnit === 'Celsius') {
     current.innerText = `${realTemperature}°C`;
     feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
@@ -62,6 +69,7 @@ async function displayMainInfo(weather) {
 
   renderWeatherIcon(weather);
 
+  // Display additional weather details
   visibility.innerText = `Visibility: ${getVisibility(
     weather
   )} ${getVisibilityUnit(weather)}`;
@@ -75,6 +83,9 @@ async function displayMainInfo(weather) {
   localTime.innerText = `${getLocalTime(weather)}`;
 }
 
+/**
+ * Loads default weather data for the city 'lobito' on page load.
+ */
 export async function loadDefaultWeatherData() {
   const cityName = 'lobito';
   const weather = await getWeather(cityName);
@@ -82,6 +93,7 @@ export async function loadDefaultWeatherData() {
   displayMainInfo(weather);
 }
 
+// Event listener for temperature unit switcher
 const radioButtons = document.getElementsByName('temp');
 radioButtons.forEach((button) =>
   button.addEventListener('click', function () {

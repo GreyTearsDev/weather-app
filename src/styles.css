@@ -6,6 +6,23 @@
   padding: 0;
 }
 
+:root {
+  /* COLORS */
+  /* ELEMENTS */
+  --color-background: #fffffe;
+  --color-headline: #272343;
+  --color-paragraph: #2d334a;
+  --color-button: #ffd803;
+  --color-button-text: #272343;
+
+  /* ILLUSTRATION */
+  --color-stroke: 272343;
+  --color-main: #fffffe;
+  --color-higlight: #ffd803;
+  --color-secondary: #e3f6f5;
+  --color-ternary: #bae8e8;
+}
+
 body {
   display: grid;
   grid-template-columns: 1fr;

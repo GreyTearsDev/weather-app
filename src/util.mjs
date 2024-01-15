@@ -58,12 +58,6 @@ export function renderWeatherIcon(weather) {
     });
 }
 
-export function getPreferredSystem() {
-  const radioButtons = document.getElementsByName('temp');
-  const metric = radioButtons[0];
-  return metric.checked ? 'metric' : 'imperial';
-}
-
 /**
  * Retrieves the selected temperature unit (Celsius or Fahrenheit)
  * from a group of radio buttons.
@@ -88,9 +82,58 @@ export function getVisibilityUnit() {
   return system == 'metric' ? 'km' : 'mi';
 }
 
+/**
+ * Retrieves the visibility value from the provided weather data.
+ *
+ * This function considers the visibility unit and returns the corresponding value.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The visibility value based on the unit specified in the weather data.
+ */
+export function getVisibility(weather) {
+  /**
+   * Determines the visibility unit (either 'kilometers' or 'miles') from the weather data.
+   * @type {String}
+   */
+  const unit = getVisibilityUnit();
+
+  if (unit === 'km') {
+    return weather.current.visibility[`${unit}`];
+  }
+
+  return weather.current.visibility[`${unit}`];
+}
+
+/**
+ * Retrieves the wind velocity from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The wind velocity value based on the unit specified in the weather data.
+ */
+export function getWindVelocity(weather) {
+  const unit = getWindUnit();
+  return weather.current.wind[`${unit}`];
+}
+
+/**
+ * Retrieves the wind unit (kilometers per hour or miles per hour) based on user preference.
+ *
+ * @returns {String} The wind unit, either 'kph' or 'mph'.
+ */
 export function getWindUnit() {
   const system = getPreferredSystem();
   return system == 'metric' ? 'kph' : 'mph';
+}
+
+/**
+ * Retrieves the preferred system (metric or imperial) based on user preference.
+ *
+ * @returns {String} The preferred system, either 'metric' or 'imperial'.
+ */
+export function getPreferredSystem() {
+  const radioButtons = document.getElementsByName('temp');
+  const metric = radioButtons[0];
+  return metric.checked ? 'metric' : 'imperial';
 }
 
 /**
@@ -176,32 +219,3 @@ export function getWeatherCondition(weather) {
 export function getHumidity(weather) {
   return weather.current.humidity;
 }
-
-/**
- * Retrieves the visibility value from the provided weather data.
- *
- * This function considers the visibility unit and returns the corresponding value.
- *
- * @param {Object} weather - The weather data object containing current conditions.
- * @returns The visibility value based on the unit specified in the weather data.
- */
-export function getVisibility(weather) {
-  /**
-   * Determines the visibility unit (either 'kilometers' or 'miles') from the weather data.
-   * @type {String}
-   */
-  const unit = getVisibilityUnit();
-
-  if (unit === 'km') {
-    return weather.current.visibility[`${unit}`];
-  }
-
-  return weather.current.visibility[`${unit}`];
-}
-
-export function getWindVelocity(weather) {
-  const unit = getWindUnit();
-  return weather.current.wind[`${unit}`];
-}
-
-function changeUnitSystem(weather) {}

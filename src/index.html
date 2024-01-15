@@ -6,7 +6,7 @@
     <title>Weather App</title>
   </head>
   <body>
-    <!-- Top section -->
+    <!-- Top section containing the search form -->
     <header class="top">
       <form action="#" class="top__form">
         <input
@@ -18,12 +18,15 @@
       </form>
     </header>
 
-    <!-- Middle section -->
+    <!-- Middle section containing location and weather information -->
     <main class="middle">
+      <!-- Location information -->
       <div class="location-info">
         <p id="region"></p>
         <p id="localtime"></p>
       </div>
+
+      <!-- Left container for weather details -->
       <div class="middle__container middle__container--left">
         <h4 id="condition"></h4>
         <p id="humidity"></p>
@@ -31,18 +34,24 @@
         <p id="visibility-level"></p>
         <p id="wind-speed"></p>
       </div>
+
+      <!-- Center container for temperature switcher and main weather data -->
       <div class="middle__container middle__container--center">
-        <fieldset class="temperature-switcher">
+        <!-- Temperature unit switcher -->
+        <div class="temperature-switcher">
           <p>
-            <input type="radio" id="celsius" name="temp" checked="checked" />
-            <label for="celsius">Metric</label>
+            <input type="radio" id="metric" name="temp" checked="checked" />
+            <label for="metric">Metric</label>
           </p>
           <p>
-            <input type="radio" id="fahrenheit" name="temp" />
-            <label for="fahrenheit">Imperial</label>
+            <input type="radio" id="imperial" name="temp" />
+            <label for="imperial">Imperial</label>
           </p>
-        </fieldset>
+        </div>
+
+        <!-- Main weather data container -->
         <div class="data__container">
+          <!-- Main weather information -->
           <div class="data__container__main-info">
             <div>
               <h2 id="city"></h2>
@@ -52,12 +61,14 @@
               <img src="" alt="" id="weather-icon" />
             </div>
           </div>
+
+          <!-- Feels-like temperature -->
           <h4 id="feels-like-temperature"></h4>
         </div>
       </div>
     </main>
 
-    <!-- Bottom section -->
+    <!-- Bottom section containing copyright information -->
     <footer class="bottom">
       <div class="bottom__copyright">
         <p>Copyright © Tirso Samalungo 2024</p>
