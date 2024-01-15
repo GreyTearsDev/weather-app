@@ -58,6 +58,12 @@ export function renderWeatherIcon(weather) {
     });
 }
 
+function getPreferredSystem() {
+  const radioButtons = document.getElementsByName('temp');
+  const metric = radioButtons[0];
+  return metric.checked ? 'metric' : 'imperial';
+}
+
 /**
  * Retrieves the selected temperature unit (Celsius or Fahrenheit)
  * from a group of radio buttons.
@@ -65,25 +71,21 @@ export function renderWeatherIcon(weather) {
  * @returns {String} The selected temperature unit.
  */
 export function getDegreeUnit() {
-  const radioButtons = document.getElementsByName('temp');
-  // Get the first radio button (assumes it represents Celsius)
-  const celsius = radioButtons[0];
-
-  if (celsius.checked) return 'Celsius';
-
-  // If Celsius is not selected, assume Fahrenheit is selected
-  return 'Fahrenheit';
+  const system = getPreferredSystem();
+  return system == 'metric' ? 'Celsius' : 'Fahrenheit';
 }
 
+/**
+ * Retrieves the visibility unit based on the selected radio button.
+ *
+ * This function checks the state of a group of radio buttons to determine the
+ * preferred visibility unit ('kilometers' or 'miles').
+ *
+ * @returns {String} The visibility unit, either 'kilometers' or 'miles'.
+ */
 export function getVisibilityUnit() {
-  const radioButtons = document.getElementsByName('temp');
-  // Get the first radio button (assumes it represents Celsius)
-  const celsius = radioButtons[0];
-
-  if (celsius.checked) return 'kilometers';
-
-  // If Celsius is not selected, assume Fahrenheit is selected
-  return 'miles';
+  const system = getPreferredSystem();
+  return system == 'metric' ? 'kilometers' : 'miles';
 }
 
 /**
