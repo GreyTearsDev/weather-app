@@ -24,7 +24,7 @@ async function fetchWeatherData(cityName) {
  * @returns {Object} A new object with filtered weather details.
  */
 function filterWeatherDetails(weatherInfo) {
-  console.log(weatherInfo.current.is_day);
+  console.log(weatherInfo);
   return {
     // Extract and structure relevant information about the current weather
     current: {
@@ -122,6 +122,5 @@ function filterWeatherDetails(weatherInfo) {
 export default async function getWeather(cityName) {
   const response = await fetchWeatherData(cityName);
   const filteredResponse = await filterWeatherDetails(response);
-  console.log(filteredResponse);
   return filteredResponse;
 }

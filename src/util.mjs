@@ -58,7 +58,7 @@ export function renderWeatherIcon(weather) {
     });
 }
 
-function getPreferredSystem() {
+export function getPreferredSystem() {
   const radioButtons = document.getElementsByName('temp');
   const metric = radioButtons[0];
   return metric.checked ? 'metric' : 'imperial';
@@ -203,3 +203,5 @@ export function getWindVelocity(weather) {
   const unit = getWindUnit();
   return weather.current.wind[`${unit}`];
 }
+
+function changeUnitSystem(weather) {}

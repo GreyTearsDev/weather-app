@@ -18,9 +18,18 @@ import {
 } from './util.mjs';
 
 export async function updateInfoOnScreen() {
+  let currentDefaultCity = 'lobito';
   const cityName = getCityNameFromUserInput();
+
+  if (cityName === '') {
+    const weather = await getWeather(currentDefaultCity);
+    displayMainInfo(weather);
+    return;
+  }
+
   const weather = await getWeather(cityName);
   displayMainInfo(weather);
+  currentDefaultCity = cityName;
 }
 
 /**
@@ -28,7 +37,7 @@ export async function updateInfoOnScreen() {
  *
  * @param {Object} weather - The weather data object containing current conditions.
  */
-function displayMainInfo(weather) {
+async function displayMainInfo(weather) {
   const current = document.getElementById('current-temperature');
   const feelsLike = document.getElementById('feels-like-temperature');
   const region = document.getElementById('region');
