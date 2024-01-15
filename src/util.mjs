@@ -108,6 +108,36 @@ export function getCityName(weather) {
 }
 
 /**
+ * Retrieves the region name from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The name of the region.
+ */
+export function getRegionName(weather) {
+  return weather.location.region;
+}
+
+/**
+ * Retrieves the local time from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The local time in the location specified by the weather data.
+ */
+export function getLocalTime(weather) {
+  return weather.location.localTime;
+}
+
+/**
+ * Retrieves the country name from the provided weather data.
+ *
+ * @param {Object} weather - The weather data object containing current conditions.
+ * @returns The name of the country.
+ */
+export function getCountry(weather) {
+  return weather.location.country;
+}
+
+/**
  * Retrieves the weather condition from the provided weather data.
  *
  * @param {Object} weather - The weather data object containing current conditions.
