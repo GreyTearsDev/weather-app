@@ -18,9 +18,18 @@ export function isDay(weather) {
   return weather.current.isDay === 1 ? true : false;
 }
 
-async function loadCSV() {
-  try {
-  } catch (err) {
-    console.error(err);
-  }
+/**
+ * Retrieves the image code corresponding to the current weather conditions.
+ *
+ * This function takes in a weather information object and extracts the weather code.
+ * It then uses the code to look up the corresponding image code from the provided
+ * code-to-icon mapping. The resulting image code is returned.
+ *
+ * @param {Object} weatherInfo - The weather information object.
+ * @returns {string} The image code associated with the current weather conditions.
+ */
+export function getImageCode(weatherInfo) {
+  const weatherCode = weatherInfo.current.code;
+  const imageCode = weatherInfo.current.codeToIcon[`${weatherCode}`];
+  return imageCode;
 }
