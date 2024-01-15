@@ -1,5 +1,6 @@
 import { getCityNameFromUserInput } from './util.mjs';
 import getWeather from './weather.mjs';
+import { isDay } from './util.mjs';
 
 export async function updateInfoOnScreen() {
   const cityName = getCityNameFromUserInput();
@@ -18,6 +19,7 @@ function displayMainInfo(weather) {
   const region = document.getElementById('region');
   const localTime = document.getElementById('localtime');
   const city = document.getElementById('city');
+  const icon = document.getElementById('weather-icon');
 
   // Determine the selected temperature unit (Celsius or Fahrenheit)
   const unit = getDegreeUnit();
@@ -25,7 +27,37 @@ function displayMainInfo(weather) {
   const feelsLikeTemperature =
     weather.current.temperature.feelsLike[`degrees${unit}`];
 
-  console.log(weather);
+  if (unit === 'Celsius') {
+    current.innerText = `${realTemperature}°C`;
+    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
+  } else {
+    current.innerText = `${realTemperature}°F`;
+    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
+  }
+
+  console.log(weather.current);
+
+  if (isDay(weather)) {
+    icon.src = `src/icons/64x64/day/${weather.current.code}.png`;
+  }
+
+  city.innerText = `${weather.location.city}`;
+  region.innerText = `${weather.location.region} - ${weather.location.country}`;
+  localTime.innerText = `${weather.location.localTime}`;
+}
+
+function displayAdditionalInfo(weather) {
+  const current = document.getElementById('current-temperature');
+  const feelsLike = document.getElementById('feels-like-temperature');
+  const region = document.getElementById('region');
+  const localTime = document.getElementById('localtime');
+  const city = document.getElementById('city');
+
+  // Determine the selected temperature unit (Celsius or Fahrenheit)
+  const unit = getDegreeUnit();
+  const realTemperature = weather.current.temperature.real[`degrees${unit}`];
+  const feelsLikeTemperature =
+    weather.current.temperature.feelsLike[`degrees${unit}`];
 
   if (unit === 'Celsius') {
     current.innerText = `${realTemperature}°C`;
@@ -39,8 +71,6 @@ function displayMainInfo(weather) {
   region.innerText = `${weather.location.region} - ${weather.location.country}`;
   localTime.innerText = `${weather.location.localTime}`;
 }
-
-async function updateLocationInfo(weather) {}
 
 /**
  * Retrieves the selected temperature unit (Celsius or Fahrenheit)

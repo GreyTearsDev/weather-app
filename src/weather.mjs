@@ -24,9 +24,12 @@ async function fetchWeatherData(cityName) {
  * @returns {Object} A new object with filtered weather details.
  */
 function filterWeatherDetails(weatherInfo) {
+  console.log(weatherInfo);
   return {
     // Extract and structure relevant information about the current weather
     current: {
+      isDay: weatherInfo.current.is_day,
+      code: weatherInfo.current.condition.code,
       temperature: {
         real: {
           degreesCelsius: weatherInfo.current.temp_c,
