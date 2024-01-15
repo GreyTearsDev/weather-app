@@ -10,6 +10,9 @@ import {
   getRegionName,
   getCountry,
   getLocalTime,
+  getHumidity,
+  getVisibility,
+  getVisibilityUnit,
 } from './util.mjs';
 
 export async function updateInfoOnScreen() {
@@ -29,7 +32,11 @@ function displayMainInfo(weather) {
   const region = document.getElementById('region');
   const localTime = document.getElementById('localtime');
   const city = document.getElementById('city');
+  const humidity = document.getElementById('humidity');
   const weatherCondition = document.getElementById('condition');
+  const visibility = document.getElementById('visibility-level');
+
+  const visibilityUnit = getVisibilityUnit(weather);
   const degreeUnit = getDegreeUnit();
   const realTemperature = getRealTemperature(weather, degreeUnit);
   const feelsLikeTemperature = getFeelsLikeTemperature(weather, degreeUnit);
@@ -43,6 +50,10 @@ function displayMainInfo(weather) {
   }
 
   renderWeatherIcon(weather);
+  visibility.innerText = `Visibility: ${getVisibility(
+    weather
+  )} ${getVisibilityUnit(weather)}`;
+  humidity.innerText = `Humidity: ${getHumidity(weather)}%`;
   weatherCondition.innerText = getWeatherCondition(weather);
   city.innerText = getCityName(weather);
   region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
