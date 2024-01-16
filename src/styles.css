@@ -52,7 +52,8 @@ main > div {
 }
 
 .top__logo {
-  border: 1px solid blue;
+  text-shadow: 2px 2px var(--color-button);
+
   font-size: 1.4rem;
   font-weight: bolder;
   display: flex;
@@ -72,10 +73,11 @@ main > div {
 }
 
 .form__input {
-  outline: none;
   border: 0.1em solid var(--color-button-text);
   border-radius: 25px 25px 25px 25px;
+  font-weight: bold;
   height: 4vh;
+  outline: none;
   padding: 1em;
   width: 100%;
 }
@@ -83,6 +85,8 @@ main > div {
 .form__button {
   background: none;
   border: none;
+  font-weight: bold;
+
   outline: none;
   box-shadow: none;
   background-color: var(--color-button);
@@ -104,7 +108,8 @@ main > div {
 
 .top__location-info {
   grid-area: location;
-  border: 1px solid green;
+  font-weight: bold;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
