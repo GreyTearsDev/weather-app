@@ -48,19 +48,24 @@ main > div {
   align-items: center;
   grid-template-columns: 20vw 1fr 20vw;
   grid-template-areas: 'logo form location';
+  padding: 0 5vw;
 }
 
 .top__logo {
+  border: 1px solid blue;
   font-family: 'Josefin Sans', sans-serif;
-  grid-area: logo;
+  font-size: 1.4rem;
+  font-weight: bolder;
   display: flex;
+  grid-area: logo;
+  height: 4vh;
   justify-content: center;
-  border: 1px solid green;
+  align-items: center;
 }
 
 .top__form {
   display: flex;
-  gap: 1%;
+  gap: 0.5vw;
   grid-area: form;
   justify-self: center;
   justify-content: space-between;
@@ -112,7 +117,8 @@ main > div {
   grid-area: middle;
   display: grid;
   grid-template-columns: 20vw 1fr;
-  grid-template-areas: 'left center right';
+  grid-template-areas: 'left center';
+  padding: 0 5vw;
 }
 
 .middle__container {
@@ -126,9 +132,6 @@ main > div {
   grid: center;
 }
 
-.middle__container--right {
-  grid-area: right;
-}
 .bottom {
   grid-area: bottom;
   display: flex;
