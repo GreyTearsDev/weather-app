@@ -181,16 +181,6 @@ export function getRegionName(weather) {
 }
 
 /**
- * Retrieves the local time from the provided weather data.
- *
- * @param {Object} weather - The weather data object containing current conditions.
- * @returns The local time in the location specified by the weather data.
- */
-export function getLocalTime(weather) {
-  return weather.location.localTime;
-}
-
-/**
  * Retrieves the country name from the provided weather data.
  *
  * @param {Object} weather - The weather data object containing current conditions.

@@ -46,7 +46,6 @@ async function displayMainInfo(weather) {
   const current = document.getElementById('current-temperature');
   const feelsLike = document.getElementById('feels-like-temperature');
   const region = document.getElementById('region');
-  const localTime = document.getElementById('localtime');
   const city = document.getElementById('city');
   const humidity = document.getElementById('humidity');
   const weatherCondition = document.getElementById('condition');
@@ -80,7 +79,6 @@ async function displayMainInfo(weather) {
   weatherCondition.innerText = getWeatherCondition(weather);
   city.innerText = getCityName(weather);
   region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
-  localTime.innerText = `${getLocalTime(weather)}`;
 }
 
 /**
