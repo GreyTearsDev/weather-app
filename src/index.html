@@ -39,28 +39,34 @@
         <p id="wind-speed"></p>
       </div>
 
-      <!-- Center container for temperature switcher and main weather data -->
-      <div class="middle__container middle__container--rigth">
-        <!-- Temperature unit switcher -->
-        <div class="temperature-switcher">
-          <p>
+      <!-- Temperature unit switcher -->
+      <div class="temperature-unit-switcher">
+        <p>
+          <label class="unit-system">
             <input type="radio" id="metric" name="temp" checked="checked" />
-            <label for="metric">Metric</label>
-          </p>
-          <p>
+            <span class="checkmark"></span>
+            Metric
+          </label>
+        </p>
+        <p>
+          <label class="unit-system">
             <input type="radio" id="imperial" name="temp" />
-            <label for="imperial">Imperial</label>
-          </p>
-        </div>
+            <span class="checkmark"></span>
+            Imperial
+          </label>
+        </p>
+      </div>
 
+      <!-- Center container for main weather data -->
+      <div class="middle__container middle__container--center">
         <!-- Main weather data container -->
         <div class="data__container">
           <!-- Main weather information -->
           <div class="data__container__main-info">
             <div>
-              <h2 id="city"></h2>
+              <h3 id="city"></h3>
+              <h1 id="current-temperature"></h1>
             </div>
-            <h1 id="current-temperature"></h1>
             <div class="img-container">
               <img src="" alt="" id="weather-icon" />
             </div>

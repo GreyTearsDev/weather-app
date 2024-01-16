@@ -33,8 +33,9 @@ body {
     'top'
     'middle'
     'bottom';
-  height: 100vh;
+  height: 98vh;
   font-family: 'Nunito', sans-serif;
+  padding-top: 1vh;
 }
 
 .top {
@@ -115,21 +116,40 @@ body {
 .middle {
   grid-area: middle;
   display: grid;
-  grid-template-columns: 20vw 1fr;
-  grid-template-areas: 'left right';
+  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-areas: 'left center right';
   padding: 0 5vw;
   position: relative;
 }
 
-.middle__container {
+.temperature-unit-switcher {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .middle__container--left {
   grid: left;
 }
 
-.middle__container--rigth {
-  grid: right;
+.middle__container--center {
+  grid: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data__container {
+  padding: 3.5em;
+  border-radius: 20px;
+  background-color: var(--color-ternary);
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .bottom {
