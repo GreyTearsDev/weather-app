@@ -19,7 +19,7 @@
   /* ILLUSTRATION */
   --color-stroke: 272343;
   --color-main: #fffffe;
-  --color-higlight: #ffd803;
+  --color-highlight: #ffd803;
   --color-secondary: #e3f6f5;
   --color-ternary: #bae8e8;
 }
@@ -37,10 +37,6 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
-main > div {
-  border: 1px solid black;
-}
-
 .top {
   grid-area: top;
   display: grid;
@@ -49,6 +45,7 @@ main > div {
   grid-template-columns: 20vw 1fr 20vw;
   grid-template-areas: 'logo form location';
   padding: 0 5vw;
+  font-size: 1.2em;
 }
 
 .top__logo {
@@ -109,7 +106,6 @@ main > div {
 .top__location-info {
   grid-area: location;
   font-weight: bold;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,12 +113,12 @@ main > div {
 }
 
 .middle {
-  border: 1px solid green;
   grid-area: middle;
   display: grid;
   grid-template-columns: 20vw 1fr;
-  grid-template-areas: 'left center';
+  grid-template-areas: 'left right';
   padding: 0 5vw;
+  position: relative;
 }
 
 .middle__container {
@@ -132,8 +128,8 @@ main > div {
   grid: left;
 }
 
-.middle__container--center {
-  grid: center;
+.middle__container--rigth {
+  grid: right;
 }
 
 .bottom {
@@ -144,8 +140,25 @@ main > div {
 }
 
 .bottom__copyright {
-  border: 1px solid blue;
+  background-color: var(--color-button);
+  border-radius: 1.5rem 1.5rem 0 0;
   display: flex;
+  font-size: 1.2em;
   flex-direction: column;
   align-items: center;
+  padding: 2vh 4vw;
+}
+
+.bottom__copyright a {
+  font-weight: bolder;
+  color: var(--color-background);
+}
+
+.bottom__copyright:hover {
+  color: var(--color-background);
+  background-color: var(--color-headline);
+}
+
+.bottom__copyright:hover a:hover {
+  color: var(--color-highlight);
 }
