@@ -6,26 +6,31 @@
     <title>Weather App</title>
   </head>
   <body>
-    <!-- Top section containing the search form -->
+    <!-- Top section-->
     <header class="top">
+      <div class="top__logo">
+        <h3>WeatherApp</h3>
+      </div>
+
+      <!-- search form  -->
       <form action="#" class="top__form">
         <input
           type="text"
           class="form__input"
-          placeholder="Write the name of a city"
+          placeholder="Search for a city"
         />
         <button class="button form__button">Search</button>
       </form>
+
+      <!-- Location information -->
+      <div class="top__location-info">
+        <p id="region"></p>
+        <p id="localtime"></p>
+      </div>
     </header>
 
     <!-- Middle section containing location and weather information -->
     <main class="middle">
-      <!-- Location information -->
-      <div class="location-info">
-        <p id="region"></p>
-        <p id="localtime"></p>
-      </div>
-
       <!-- Left container for weather details -->
       <div class="middle__container middle__container--left">
         <h4 id="condition"></h4>
