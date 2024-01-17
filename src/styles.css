@@ -142,6 +142,33 @@ body {
   position: relative;
 }
 
+.temperature-unit-switcher p {
+  background-color: var(--color-button);
+  border-radius: 10px 10px 10px 10px;
+  color: var(--color-button-text);
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: 600;
+  height: 30px;
+  justify-content: center;
+  margin-bottom: 5px;
+  width: 120px;
+}
+
+.temperature-unit-switcher p:hover {
+  background-color: var(--color-button-text);
+  color: var(--color-button);
+  cursor: pointer;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+input[type='radio'] {
+  appearance: none;
+}
+
 .temperature-unit-switcher {
   grid-area: right;
   display: flex;
