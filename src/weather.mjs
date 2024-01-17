@@ -12,7 +12,6 @@ async function fetchWeatherData(cityName) {
     `https://api.weatherapi.com/v1/current.json?key=998c75f5d06b4a84ae245051241201&q=${cityName}`
   );
 
-  console.log(response);
   if (!response.ok) throw new Error('Location Not Found');
 
   return response.json();
@@ -131,7 +130,6 @@ export default async function getWeather(cityName) {
 
     return weatherData;
   } catch (error) {
-    console.error(error);
     displayErrorMessage(error);
     setTimeout(eraseErrorMessage, 3000);
     return null;

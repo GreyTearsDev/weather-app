@@ -72,12 +72,22 @@ body {
 
 .error-container {
   display: none;
-  position: absolute;
-  font-size: larger;
+  position: fixed;
+  font-size: 1.2rem;
+  top: 10vh;
+  margin: auto;
+  width: 15vw;
+  text-align: center;
 }
 
 .error-container p {
   display: none;
+  background-color: var(--color-button);
+  padding: 0.5em;
+  font-weight: 600;
+  border-radius: 15px 15px 15px 15px;
+  transition-property: opacity scale;
+  transition-timing-function: ease-in-out;
 }
 
 .form__input {

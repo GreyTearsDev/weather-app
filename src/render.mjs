@@ -34,7 +34,7 @@ export async function updateInfoOnScreen() {
 
   getWeather(cityName)
     .then((data) => {
-      if (data === undefined) return;
+      if (data === undefined || data === null) return;
       displayMainInfo(data);
       currentDefaultCity = cityName;
     })
@@ -88,9 +88,7 @@ function displayMainInfo(weather) {
     weatherCondition.innerText = getWeatherCondition(weather);
     city.innerText = getCityName(weather);
     region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
-  } catch (e) {
-    console.error(`${e.name}: ${e.message}`);
-  }
+  } catch (e) {}
 }
 
 /**
@@ -110,20 +108,39 @@ radioButtons.forEach((button) =>
   })
 );
 
+/**
+ * Displays an error message on the webpage based on the provided message.
+ *
+ * @param {string} message - The error message to be displayed.
+ * @returns {void}
+ */
 export function displayErrorMessage(message) {
-  const errorMessage = document.querySelector('.error-container');
+  const errorMessage = document.querySelector('.error-msg');
+  const errorContainer = document.querySelector('.error-container');
+  // Check if the message is related to a location not found error
   if (message == 'Error: Location Not Found') {
     errorMessage.innerText = 'Location not found!';
     errorMessage.style.display = 'block';
+    errorContainer.style.display = 'block';
+
     return;
   }
 
   errorMessage.innerText = 'Something went wrong!';
   errorMessage.style.display = 'block';
+  errorContainer.style.display = 'block';
 }
 
+/**
+ * Erases the displayed error message on the webpage.
+ *
+ * @returns {void}
+ */
 export function eraseErrorMessage() {
   const errorMessage = document.querySelector('.error-container');
+  const errorContainer = document.querySelector('.error-container');
+
   errorMessage.innerText = '';
   errorMessage.style.display = 'none';
+  errorContainer.style.display = 'none';
 }
