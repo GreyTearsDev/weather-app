@@ -26,14 +26,22 @@ export async function updateInfoOnScreen() {
   const cityName = getCityNameFromUserInput();
 
   if (cityName === '') {
-    const weather = await getWeather(currentDefaultCity);
-    displayMainInfo(weather);
+    getWeather(currentDefaultCity)
+      .then(displayMainInfo)
+      .catch((err) => console.error(err));
     return;
   }
 
-  const weather = await getWeather(cityName);
-  displayMainInfo(weather);
-  currentDefaultCity = cityName;
+  getWeather(cityName)
+    .then((data) => {
+      if (data === undefined) return;
+      displayMainInfo(data);
+      currentDefaultCity = cityName;
+    })
+    .catch((data) => {
+      displayErrorMessage(data);
+      setTimeout(eraseErrorMessage, 5000);
+    });
 }
 
 /**
@@ -41,44 +49,48 @@ export async function updateInfoOnScreen() {
  *
  * @param {Object} weather - The weather data object containing current conditions.
  */
-async function displayMainInfo(weather) {
-  // DOM elements
-  const current = document.getElementById('current-temperature');
-  const feelsLike = document.getElementById('feels-like-temperature');
-  const region = document.getElementById('region');
-  const city = document.getElementById('city');
-  const humidity = document.getElementById('humidity');
-  const weatherCondition = document.getElementById('condition');
-  const visibility = document.getElementById('visibility-level');
-  const wind = document.getElementById('wind-speed');
+function displayMainInfo(weather) {
+  try {
+    // DOM elements
+    const current = document.getElementById('current-temperature');
+    const feelsLike = document.getElementById('feels-like-temperature');
+    const region = document.getElementById('region');
+    const city = document.getElementById('city');
+    const humidity = document.getElementById('humidity');
+    const weatherCondition = document.getElementById('condition');
+    const visibility = document.getElementById('visibility-level');
+    const wind = document.getElementById('wind-speed');
 
-  // Weather data and units
-  const degreeUnit = getDegreeUnit();
-  const realTemperature = getRealTemperature(weather);
-  const feelsLikeTemperature = getFeelsLikeTemperature(weather);
+    // Weather data and units
+    const degreeUnit = getDegreeUnit();
+    const realTemperature = getRealTemperature(weather);
+    const feelsLikeTemperature = getFeelsLikeTemperature(weather);
 
-  // Display temperature based on the selected unit
-  if (degreeUnit === 'Celsius') {
-    current.innerText = `${realTemperature}°C`;
-    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
-  } else {
-    current.innerText = `${realTemperature}°F`;
-    feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
+    // Display temperature based on the selected unit
+    if (degreeUnit === 'Celsius') {
+      current.innerText = `${realTemperature}°C`;
+      feelsLike.innerText = `Feels like ${feelsLikeTemperature}°C`;
+    } else {
+      current.innerText = `${realTemperature}°F`;
+      feelsLike.innerText = `Feels like ${feelsLikeTemperature}°F`;
+    }
+
+    renderWeatherIcon(weather);
+
+    // Display additional weather details
+    visibility.innerText = `Visibility: ${getVisibility(
+      weather
+    )} ${getVisibilityUnit(weather)}`;
+    wind.innerText = `Wind velocity: ${getWindVelocity(
+      weather
+    )} ${getWindUnit()}`;
+    humidity.innerText = `Humidity: ${getHumidity(weather)}%`;
+    weatherCondition.innerText = getWeatherCondition(weather);
+    city.innerText = getCityName(weather);
+    region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
+  } catch (e) {
+    console.error(`${e.name}: ${e.message}`);
   }
-
-  renderWeatherIcon(weather);
-
-  // Display additional weather details
-  visibility.innerText = `Visibility: ${getVisibility(
-    weather
-  )} ${getVisibilityUnit(weather)}`;
-  wind.innerText = `Wind velocity: ${getWindVelocity(
-    weather
-  )} ${getWindUnit()}`;
-  humidity.innerText = `Humidity: ${getHumidity(weather)}%`;
-  weatherCondition.innerText = getWeatherCondition(weather);
-  city.innerText = getCityName(weather);
-  region.innerText = `${getRegionName(weather)} - ${getCountry(weather)}`;
 }
 
 /**
@@ -87,7 +99,6 @@ async function displayMainInfo(weather) {
 export async function loadDefaultWeatherData() {
   const cityName = 'lobito';
   const weather = await getWeather(cityName);
-  console.log(weather);
   displayMainInfo(weather);
 }
 
@@ -98,3 +109,13 @@ radioButtons.forEach((button) =>
     updateInfoOnScreen();
   })
 );
+
+export function displayErrorMessage(message) {
+  const errorMessage = document.querySelector('.error-msg');
+  errorMessage.innerText = message;
+}
+
+export function eraseErrorMessage() {
+  const errorMessage = document.querySelector('.error-msg');
+  errorMessage.innerText = '';
+}

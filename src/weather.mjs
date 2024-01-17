@@ -1,3 +1,5 @@
+import { eraseErrorMessage, displayErrorMessage } from './render.mjs';
+
 /**
  * Fetches weather data for a specified city using the WeatherAPI's API
  * (available at https://api.weatherapi.com).
@@ -6,14 +8,14 @@
  * @returns {Promise} A promise resolving to the weather data.
  */
 async function fetchWeatherData(cityName) {
-  try {
-    const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=998c75f5d06b4a84ae245051241201&q=${cityName}`
-    );
-    return response.json();
-  } catch (e) {
-    console.error(e);
-  }
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/current.json?key=998c75f5d06b4a84ae245051241201&q=${cityName}`
+  );
+
+  console.log(response);
+  if (!response.ok) throw new Error('Location Not Found');
+
+  return response.json();
 }
 
 /**
@@ -24,7 +26,9 @@ async function fetchWeatherData(cityName) {
  * @returns {Object} A new object with filtered weather details.
  */
 function filterWeatherDetails(weatherInfo) {
-  console.log(weatherInfo);
+  if (!weatherInfo || !weatherInfo.current || !weatherInfo.location) {
+    throw new Error('Invalid weather data structure');
+  }
   return {
     // Extract and structure relevant information about the current weather
     current: {
@@ -120,7 +124,16 @@ function filterWeatherDetails(weatherInfo) {
  * @returns {Object} An object containing weather information.
  */
 export default async function getWeather(cityName) {
-  const response = await fetchWeatherData(cityName);
-  const filteredResponse = await filterWeatherDetails(response);
-  return filteredResponse;
+  try {
+    const weatherData = await fetchWeatherData(cityName).then(
+      filterWeatherDetails
+    );
+
+    return weatherData;
+  } catch (error) {
+    console.error(error);
+    displayErrorMessage(error);
+    setTimeout(eraseErrorMessage, 5000);
+    return null;
+  }
 }

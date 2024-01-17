@@ -70,6 +70,12 @@ body {
   width: clamp(60px, 30vw, 500px);
 }
 
+.error-container {
+  /* display: none; */
+  position: absolute;
+  font-size: larger;
+}
+
 .form__input {
   border: 0.1em solid var(--color-button-text);
   border-radius: 25px 25px 25px 25px;
@@ -131,6 +137,9 @@ body {
 
 .middle__container--left {
   grid: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .middle__container--center {
