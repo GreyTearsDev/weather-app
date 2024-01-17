@@ -133,7 +133,7 @@ export default async function getWeather(cityName) {
   } catch (error) {
     console.error(error);
     displayErrorMessage(error);
-    setTimeout(eraseErrorMessage, 5000);
+    setTimeout(eraseErrorMessage, 3000);
     return null;
   }
 }

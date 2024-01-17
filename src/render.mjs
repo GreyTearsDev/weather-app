@@ -111,11 +111,19 @@ radioButtons.forEach((button) =>
 );
 
 export function displayErrorMessage(message) {
-  const errorMessage = document.querySelector('.error-msg');
-  errorMessage.innerText = message;
+  const errorMessage = document.querySelector('.error-container');
+  if (message == 'Error: Location Not Found') {
+    errorMessage.innerText = 'Location not found!';
+    errorMessage.style.display = 'block';
+    return;
+  }
+
+  errorMessage.innerText = 'Something went wrong!';
+  errorMessage.style.display = 'block';
 }
 
 export function eraseErrorMessage() {
-  const errorMessage = document.querySelector('.error-msg');
+  const errorMessage = document.querySelector('.error-container');
   errorMessage.innerText = '';
+  errorMessage.style.display = 'none';
 }
