@@ -9,17 +9,19 @@ import {
   getCityNameFromUserInput,
   getRegionName,
   getCountry,
-  getLocalTime,
   getHumidity,
   getVisibility,
   getVisibilityUnit,
   getWindVelocity,
   getWindUnit,
+  highlightSystemInUse,
 } from './util.mjs';
 
 /**
  * Updates the weather information displayed on the webpage based on user input.
  * If no city name is provided, it defaults to 'lobito'.
+ *
+ * @returns {void}
  */
 export async function updateInfoOnScreen() {
   let currentDefaultCity = 'lobito';
@@ -76,6 +78,7 @@ function displayMainInfo(weather) {
     }
 
     renderWeatherIcon(weather);
+    highlightSystemInUse();
 
     // Display additional weather details
     visibility.innerText = `Visibility: ${getVisibility(

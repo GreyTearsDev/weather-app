@@ -209,3 +209,32 @@ export function getWeatherCondition(weather) {
 export function getHumidity(weather) {
   return weather.current.humidity;
 }
+
+export function highlightSystemInUse() {
+  const metricLabel = document.querySelector('.unit--metric');
+  const imperialLabel = document.querySelector('.unit--imperial');
+  const metricContainer = document.querySelector('.system-container--metric');
+  const imperialContainer = document.querySelector(
+    '.system-container--imperial'
+  );
+
+  if (getPreferredSystem() === 'metric') {
+    metricLabel.classList.add('active-system');
+    metricContainer.classList.add('active-system');
+    try {
+      imperialLabel.classList.remove('active-system');
+      imperialContainer.classList.remove('active-system');
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    imperialLabel.classList.add('active-system');
+    imperialContainer.classList.add('active-system');
+    try {
+      metricLabel.classList.remove('active-system');
+      metricContainer.classList.remove('active-system');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}

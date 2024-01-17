@@ -27,6 +27,7 @@
 body {
   background-color: var(--color-background);
   display: grid;
+  font-family: 'Nunito', sans-serif;
   grid-template-columns: 100vw;
   grid-template-rows: clamp(60px, 10vh, 80px) 1fr 50px;
   grid-template-areas:
@@ -34,31 +35,29 @@ body {
     'middle'
     'bottom';
   height: 98vh;
-  font-family: 'Nunito', sans-serif;
   padding-top: 1vh;
 }
 
 .top {
-  grid-area: top;
-  display: grid;
-  justify-content: center;
   align-items: center;
+  display: grid;
+  font-size: 1.2em;
+  grid-area: top;
   grid-template-columns: 20vw 1fr 20vw;
   grid-template-areas: 'logo form location';
+  justify-content: center;
   padding: 0 5vw;
-  font-size: 1.2em;
 }
 
 .top__logo {
-  text-shadow: 2px 2px var(--color-button);
-
+  align-items: center;
+  display: flex;
   font-size: 1.4rem;
   font-weight: bolder;
-  display: flex;
   grid-area: logo;
   height: 4vh;
   justify-content: center;
-  align-items: center;
+  text-shadow: 2px 2px var(--color-button);
 }
 
 .top__form {
@@ -72,20 +71,20 @@ body {
 
 .error-container {
   display: none;
-  position: fixed;
   font-size: 1.2rem;
-  top: 10vh;
   margin: auto;
-  width: 15vw;
+  position: fixed;
   text-align: center;
+  top: 10vh;
+  width: 15vw;
 }
 
 .error-container p {
-  display: none;
   background-color: var(--color-button);
-  padding: 0.5em;
-  font-weight: 600;
   border-radius: 15px 15px 15px 15px;
+  display: none;
+  font-weight: 600;
+  padding: 0.5em;
   transition-property: opacity scale;
   transition-timing-function: ease-in-out;
 }
@@ -102,22 +101,21 @@ body {
 
 .form__button {
   background: none;
-  border: none;
-  font-weight: bold;
-
-  outline: none;
-  box-shadow: none;
   background-color: var(--color-button);
-  color: var(--color-button-text);
-  width: max-content;
+  border: none;
   border-radius: 25px 25px 25px 25px;
+  box-shadow: none;
+  color: var(--color-button-text);
+  font-weight: bold;
+  outline: none;
   padding: 0 5%;
+  width: max-content;
 }
 
 .form__button:hover {
-  cursor: pointer;
   background-color: var(--color-button-text);
   color: var(--color-button);
+  cursor: pointer;
 }
 
 .form__button:active {
@@ -125,24 +123,24 @@ body {
 }
 
 .top__location-info {
-  grid-area: location;
-  font-weight: bold;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  font-weight: bold;
+  grid-area: location;
   justify-content: center;
-  align-items: center;
 }
 
 .middle {
-  grid-area: middle;
   display: grid;
+  grid-area: middle;
   grid-template-columns: 20vw 1fr 20vw;
   grid-template-areas: 'left center right';
   padding: 0 5vw;
   position: relative;
 }
 
-.temperature-unit-switcher p {
+.temperature-unit-switcher .system-container {
   background-color: var(--color-button);
   border-radius: 10px 10px 10px 10px;
   color: var(--color-button-text);
@@ -155,10 +153,19 @@ body {
   width: 120px;
 }
 
-.temperature-unit-switcher p:hover {
+.system-container:hover {
+  cursor: pointer;
+}
+
+.active-system {
+  border-radius: 10px 10px 10px 10px;
   background-color: var(--color-button-text);
   color: var(--color-button);
-  cursor: pointer;
+}
+
+label {
+  width: 100%;
+  text-align: center;
 }
 
 label:hover {
@@ -170,63 +177,63 @@ input[type='radio'] {
 }
 
 .temperature-unit-switcher {
-  grid-area: right;
   display: flex;
   flex-direction: column;
+  grid-area: right;
   justify-content: center;
 }
 
 .middle__container--left {
-  grid: left;
   display: flex;
   flex-direction: column;
+  grid: left;
   justify-content: center;
 }
 
 .middle__container--center {
-  grid: center;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  grid: center;
+  justify-content: center;
 }
 
 .data__container {
-  padding: 3.5em;
-  border-radius: 20px;
   background-color: var(--color-ternary);
+  border-radius: 20px;
+  padding: 3.5em;
 }
 
 .img-container {
+  align-content: center;
   display: flex;
   justify-content: center;
-  align-content: center;
 }
 
 .bottom {
-  grid-area: bottom;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  grid-area: bottom;
+  justify-content: center;
 }
 
 .bottom__copyright {
+  align-items: center;
   background-color: var(--color-button);
   border-radius: 1.5rem 1.5rem 0 0;
   display: flex;
   font-size: 1.2em;
   flex-direction: column;
-  align-items: center;
   padding: 2vh 4vw;
 }
 
 .bottom__copyright a {
-  font-weight: bolder;
   color: var(--color-background);
+  font-weight: bolder;
 }
 
 .bottom__copyright:hover {
-  color: var(--color-background);
   background-color: var(--color-headline);
+  color: var(--color-background);
 }
 
 .bottom__copyright:hover a:hover {
