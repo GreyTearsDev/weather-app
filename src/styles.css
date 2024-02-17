@@ -38,6 +38,7 @@ body {
   padding-top: 1vh;
 }
 
+/* Top section styles for the header and form */
 .top {
   align-items: center;
   display: grid;
@@ -49,6 +50,7 @@ body {
   padding: 0 5vw;
 }
 
+/* Logo styles in the top section */
 .top__logo {
   align-items: center;
   display: flex;
@@ -60,6 +62,7 @@ body {
   text-shadow: 2px 2px var(--color-button);
 }
 
+/* Form styles in the top section */
 .top__form {
   display: flex;
   gap: 0.5vw;
@@ -69,6 +72,7 @@ body {
   width: clamp(60px, 30vw, 500px);
 }
 
+/* Error container styles for displaying error messages */
 .error-container {
   display: none;
   font-size: 1.2rem;
@@ -89,6 +93,7 @@ body {
   transition-timing-function: ease-in-out;
 }
 
+/* Input field styles in the form */
 .form__input {
   border: 0.1em solid var(--color-button-text);
   border-radius: 25px 25px 25px 25px;
@@ -99,6 +104,7 @@ body {
   width: 100%;
 }
 
+/* Button styles in the form */
 .form__button {
   background: none;
   background-color: var(--color-button);
@@ -112,16 +118,19 @@ body {
   width: max-content;
 }
 
+/* Button hover styles in the form */
 .form__button:hover {
   background-color: var(--color-button-text);
   color: var(--color-button);
   cursor: pointer;
 }
 
+/* Button active styles in the form */
 .form__button:active {
   font-size: 70%;
 }
 
+/* Location info styles in the top section */
 .top__location-info {
   align-items: center;
   display: flex;
@@ -131,6 +140,7 @@ body {
   justify-content: center;
 }
 
+/* Middle section styles for the main content */
 .middle {
   display: grid;
   grid-area: middle;
@@ -140,6 +150,7 @@ body {
   position: relative;
 }
 
+/* Temperature unit switcher styles */
 .temperature-unit-switcher .system-container {
   background-color: var(--color-button);
   border-radius: 10px 10px 10px 10px;
@@ -153,6 +164,7 @@ body {
   width: 120px;
 }
 
+/* Hover styles for temperature unit switcher */
 .system-container:hover {
   cursor: pointer;
 }

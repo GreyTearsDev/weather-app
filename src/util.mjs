@@ -210,6 +210,17 @@ export function getHumidity(weather) {
   return weather.current.humidity;
 }
 
+/**
+ * Highlights the active system preference on the webpage.
+ *
+ * This function dynamically manages the visual representation of the user's preferred
+ * system—either metric or imperial. It applies and removes specific CSS classes to
+ * accentuate the active system, ensuring a clear and aesthetically coherent user
+ * experience. The function intelligently selects and manipulates DOM elements such
+ * as labels and containers to reflect the currently favored system of measurement.
+ *
+ * @returns {void}
+ */
 export function highlightSystemInUse() {
   const metricLabel = document.querySelector('.unit--metric');
   const imperialLabel = document.querySelector('.unit--imperial');

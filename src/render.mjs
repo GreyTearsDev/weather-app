@@ -49,7 +49,15 @@ export async function updateInfoOnScreen() {
 /**
  * Displays main weather information on the webpage.
  *
+ * This function updates the DOM elements with the main weather information,
+ * including current temperature, feels-like temperature, region, city, humidity,
+ * weather condition, visibility, and wind speed. It dynamically adjusts the
+ * displayed temperature based on the selected unit (Celsius or Fahrenheit) and
+ * loads the corresponding weather icon. Additionally, it highlights the preferred
+ * system (metric or imperial) based on user selection.
+ *
  * @param {Object} weather - The weather data object containing current conditions.
+ * @returns {void}
  */
 function displayMainInfo(weather) {
   try {
@@ -96,6 +104,12 @@ function displayMainInfo(weather) {
 
 /**
  * Loads default weather data for the city 'lobito' on page load.
+ *
+ * This function fetches weather data for the default city 'lobito' using the
+ * getWeather function. It then displays the main weather information on the
+ * webpage by calling the displayMainInfo function.
+ *
+ * @returns {void}
  */
 export async function loadDefaultWeatherData() {
   const cityName = 'lobito';
@@ -103,7 +117,15 @@ export async function loadDefaultWeatherData() {
   displayMainInfo(weather);
 }
 
-// Event listener for temperature unit switcher
+/**
+ * Event listener for the temperature unit switcher.
+ *
+ * This function sets up an event listener on the temperature unit switcher radio buttons.
+ * When a radio button is clicked, it triggers the updateInfoOnScreen function to update
+ * the weather information on the webpage based on the selected temperature unit.
+ *
+ * @returns {void}
+ */
 const radioButtons = document.getElementsByName('temp');
 radioButtons.forEach((button) =>
   button.addEventListener('click', function () {

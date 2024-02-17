@@ -6,6 +6,7 @@ import { eraseErrorMessage, displayErrorMessage } from './render.mjs';
  *
  * @param {String} cityName - The name of the city.
  * @returns {Promise} A promise resolving to the weather data.
+ * @throws {Error} Throws an error if the location is not found.
  */
 async function fetchWeatherData(cityName) {
   const response = await fetch(
@@ -23,6 +24,7 @@ async function fetchWeatherData(cityName) {
  *
  * @param {Object} weatherInfo - The raw weather data to be filtered.
  * @returns {Object} A new object with filtered weather details.
+ * @throws {Error} Throws an error if the weather data structure is invalid.
  */
 function filterWeatherDetails(weatherInfo) {
   if (!weatherInfo || !weatherInfo.current || !weatherInfo.location) {
@@ -121,6 +123,7 @@ function filterWeatherDetails(weatherInfo) {
  *
  * @param {String} cityName - The name of the city.
  * @returns {Object} An object containing weather information.
+ * @throws {Error} Throws an error if there is an issue fetching or filtering the data.
  */
 export default async function getWeather(cityName) {
   try {
@@ -130,6 +133,7 @@ export default async function getWeather(cityName) {
 
     return weatherData;
   } catch (error) {
+    // Display error message to the user and erase after 3 seconds
     displayErrorMessage(error);
     setTimeout(eraseErrorMessage, 3000);
     return null;
